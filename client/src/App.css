@@ -170,6 +170,10 @@ body {
   background: #f59e0b;
 }
 
+.bar--filter {
+  background: #f43f5e;
+}
+
 .bar-count {
   width: 36px;
   font-size: 0.85rem;

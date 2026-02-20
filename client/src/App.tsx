@@ -8,6 +8,7 @@ import type { RootState } from './store/index'
 function App() {
   const wordFrequency = useSelector((state: RootState) => state.editor.wordFrequency)
   const fillerFrequency = useSelector((state: RootState) => state.editor.fillerFrequency)
+  const filterWordFrequency = useSelector((state: RootState) => state.editor.filterWordFrequency)
 
   return (
     <div className="app">
@@ -20,6 +21,7 @@ function App() {
       </div>
       <FrequencyPanel title="Word Frequency" data={wordFrequency} barClass="bar" />
       <FrequencyPanel title="Filler Word Frequency" data={fillerFrequency} barClass="bar bar--filler" />
+      <FrequencyPanel title="Filter Word Frequency" data={filterWordFrequency} barClass="bar bar--filter" />
     </div>
   )
 }

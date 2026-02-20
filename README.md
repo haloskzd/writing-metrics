@@ -86,6 +86,13 @@ npm run db:migrate --workspace=server
 
 ---
 
+## TODO
+
+- [ ] Add unit tests for `extractFilterWordFrequency` in `client/src/utils/textAnalysis.test.ts`
+- [ ] Add reducer test for `processFilterWords` in `client/src/store/editorSlice.test.ts`
+
+---
+
 ## Build
 
 ```bash

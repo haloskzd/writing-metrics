@@ -1,6 +1,6 @@
-import { ScanText, Hash, List } from 'lucide-react'
+import { ScanText, Hash, Eye, List } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { processText, processFillers, toggleViewMode } from '../store/editorSlice'
+import { processText, processFillers, processFilterWords, toggleViewMode } from '../store/editorSlice'
 import type { RootState } from '../store/index'
 
 export default function Toolbar() {
@@ -24,6 +24,14 @@ export default function Toolbar() {
         onClick={() => dispatch(processFillers())}
       >
         <Hash size={22} />
+      </button>
+      <button
+        className="toolbar-btn"
+        title="Analyze Filter Words"
+        aria-label="Analyze Filter Words"
+        onClick={() => dispatch(processFilterWords())}
+      >
+        <Eye size={22} />
       </button>
       <button
         className={`toolbar-btn${viewMode === 'text' ? ' toolbar-btn--active' : ''}`}

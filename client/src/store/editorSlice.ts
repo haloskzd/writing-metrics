@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { extractWordFrequency, extractFillerFrequency, WordCount } from '../utils/textAnalysis'
+import { extractWordFrequency, extractFillerFrequency, extractFilterWordFrequency, WordCount } from '../utils/textAnalysis'
 
 interface EditorState {
   text: string
   wordFrequency: WordCount[]
   fillerFrequency: WordCount[]
+  filterWordFrequency: WordCount[]
   viewMode: 'chart' | 'text'
 }
 
@@ -12,6 +13,7 @@ const initialState: EditorState = {
   text: '',
   wordFrequency: [],
   fillerFrequency: [],
+  filterWordFrequency: [],
   viewMode: 'chart',
 }
 
@@ -28,11 +30,14 @@ export const editorSlice = createSlice({
     processFillers: (state) => {
       state.fillerFrequency = extractFillerFrequency(state.text)
     },
+    processFilterWords: (state) => {
+      state.filterWordFrequency = extractFilterWordFrequency(state.text)
+    },
     toggleViewMode: (state) => {
       state.viewMode = state.viewMode === 'chart' ? 'text' : 'chart'
     },
   },
 })
 
-export const { setText, processText, processFillers, toggleViewMode } = editorSlice.actions
+export const { setText, processText, processFillers, processFilterWords, toggleViewMode } = editorSlice.actions
 export default editorSlice.reducer
