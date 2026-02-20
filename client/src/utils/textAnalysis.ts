@@ -1,4 +1,4 @@
-import { STOP_WORDS, FILTER_WORDS, ADVERB_EXCLUSIONS } from './wordLists'
+import { STOP_WORDS, FILTER_WORDS, ADVERB_EXCLUSIONS, IRREGULAR_PAST_PARTICIPLES, PASSIVE_EXCLUSIONS } from './wordLists'
 
 export interface WordCount {
   word: string
@@ -41,6 +41,44 @@ export function extractFilterWordFrequency(text: string): WordCount[] {
 // in prose (early, daily, nightly, leisurely) are intentionally kept.
 export function extractAdverbFrequency(text: string): WordCount[] {
   return countWords(text, (word) => word.endsWith('ly') && word.length > 3 && !ADVERB_EXCLUSIONS.has(word))
+}
+
+const BE_VERBS = new Set(['am', 'is', 'are', 'was', 'were', 'be', 'been', 'being'])
+
+function isPastParticiple(word: string): boolean {
+  if (PASSIVE_EXCLUSIONS.has(word)) return false
+  if (IRREGULAR_PAST_PARTICIPLES.has(word)) return true
+  return word.endsWith('ed') && word.length > 3
+}
+
+// Passive voice detection: finds be-verb + past participle constructions,
+// optionally with a single adverb in between (e.g. "was quickly eaten").
+// Stative adjectives and known false positives are excluded via PASSIVE_EXCLUSIONS.
+export function extractPassiveVoice(text: string): WordCount[] {
+  const normalized = text.toLowerCase().replace(/[\u2018\u2019]/g, "'")
+  const tokens = (normalized.match(/[a-z']+/g) ?? [])
+    .map(t => t.replace(/^'+|'+$/g, ''))
+    .filter(t => t.length > 0)
+
+  const counts = new Map<string, number>()
+  for (let i = 0; i < tokens.length - 1; i++) {
+    if (!BE_VERBS.has(tokens[i])) continue
+
+    const next = tokens[i + 1]
+    if (isPastParticiple(next)) {
+      const phrase = `${tokens[i]} ${next}`
+      counts.set(phrase, (counts.get(phrase) ?? 0) + 1)
+    } else if (next.endsWith('ly') && i + 2 < tokens.length && isPastParticiple(tokens[i + 2])) {
+      // skip one adverb: "was quickly eaten"
+      const phrase = `${tokens[i]} ${next} ${tokens[i + 2]}`
+      counts.set(phrase, (counts.get(phrase) ?? 0) + 1)
+    }
+  }
+
+  return Array.from(counts.entries())
+    .map(([word, count]) => ({ word, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 30)
 }
 
 // Repeated phrase detection: counts all bigrams and trigrams, keeping only

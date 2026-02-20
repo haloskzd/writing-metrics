@@ -28,6 +28,42 @@ export const STOP_WORDS = new Set([
   "shouldn't", "isn't", "aren't", "wasn't", "weren't", "haven't", "hadn't",
 ])
 
+// Common irregular past participles (don't end in -ed) used for passive voice detection
+export const IRREGULAR_PAST_PARTICIPLES = new Set([
+  // -en / -n forms
+  'written', 'bitten', 'eaten', 'fallen', 'given', 'hidden', 'risen', 'ridden',
+  'driven', 'taken', 'broken', 'chosen', 'frozen', 'spoken', 'stolen', 'woven',
+  'forgiven', 'forbidden', 'gotten', 'beaten', 'shaken', 'mistaken', 'undertaken',
+  'known', 'grown', 'shown', 'blown', 'thrown', 'drawn', 'worn', 'torn',
+  'born', 'sworn', 'borne', 'seen', 'been', 'done', 'gone',
+  // -t forms
+  'built', 'felt', 'kept', 'left', 'meant', 'dealt', 'slept', 'swept', 'wept',
+  'bent', 'lent', 'rent', 'sent', 'spent', 'burnt', 'learnt',
+  'brought', 'bought', 'caught', 'taught', 'thought', 'fought', 'sought',
+  'told', 'sold', 'held',
+  // -d / zero-change forms
+  'heard', 'made', 'paid', 'said', 'led', 'met', 'set', 'cut', 'put',
+  'let', 'shut', 'hit', 'hurt', 'burst', 'cost', 'lost',
+  'found', 'bound', 'wound', 'ground', 'stood', 'understood', 'withstood',
+  // -un / -ng forms
+  'run', 'won', 'begun', 'sung', 'rung', 'sprung', 'stung', 'swung', 'hung', 'flung',
+])
+
+// Stative adjectives ending in -ed that follow be-verbs but are NOT passive voice
+export const PASSIVE_EXCLUSIONS = new Set([
+  // emotional states
+  'tired', 'bored', 'excited', 'interested', 'worried', 'surprised', 'confused',
+  'annoyed', 'frustrated', 'disappointed', 'pleased', 'satisfied', 'relaxed',
+  'delighted', 'shocked', 'embarrassed', 'scared', 'frightened', 'amused',
+  'astonished', 'amazed', 'stunned', 'troubled', 'concerned', 'disgusted',
+  'thrilled', 'depressed', 'stressed', 'overwhelmed', 'offended', 'alarmed',
+  // descriptive adjectives
+  'blessed', 'beloved', 'aged', 'wicked', 'naked', 'ragged', 'wretched',
+  'crooked', 'learned', 'alleged', 'supposed', 'supposed',
+  // relationship / status
+  'married', 'divorced', 'engaged', 'retired',
+])
+
 // Words ending in -ly that are NOT adverbs, used to filter false positives
 export const ADVERB_EXCLUSIONS = new Set([
   // Nouns

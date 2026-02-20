@@ -186,6 +186,10 @@ body {
   background: #f97316;
 }
 
+.bar--passive {
+  background: #64748b;
+}
+
 .bar-count {
   width: 36px;
   font-size: 0.85rem;

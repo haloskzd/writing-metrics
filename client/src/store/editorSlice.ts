@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { extractWordFrequency, extractFillerFrequency, extractFilterWordFrequency, extractAdverbFrequency, extractSentenceLengths, extractRepeatedPhrases, WordCount } from '../utils/textAnalysis'
+import { extractWordFrequency, extractFillerFrequency, extractFilterWordFrequency, extractAdverbFrequency, extractSentenceLengths, extractRepeatedPhrases, extractPassiveVoice, WordCount } from '../utils/textAnalysis'
 
 export interface EditorState {
   text: string
@@ -9,6 +9,7 @@ export interface EditorState {
   adverbFrequency: WordCount[]
   sentenceLengthFrequency: WordCount[]
   repeatedPhraseFrequency: WordCount[]
+  passiveVoiceFrequency: WordCount[]
   viewMode: 'chart' | 'text'
 }
 
@@ -20,6 +21,7 @@ const initialState: EditorState = {
   adverbFrequency: [],
   sentenceLengthFrequency: [],
   repeatedPhraseFrequency: [],
+  passiveVoiceFrequency: [],
   viewMode: 'chart',
 }
 
@@ -48,11 +50,14 @@ export const editorSlice = createSlice({
     processRepeatedPhrases: (state) => {
       state.repeatedPhraseFrequency = extractRepeatedPhrases(state.text)
     },
+    processPassiveVoice: (state) => {
+      state.passiveVoiceFrequency = extractPassiveVoice(state.text)
+    },
     toggleViewMode: (state) => {
       state.viewMode = state.viewMode === 'chart' ? 'text' : 'chart'
     },
   },
 })
 
-export const { setText, processText, processFillers, processFilterWords, processAdverbs, processSentenceLengths, processRepeatedPhrases, toggleViewMode } = editorSlice.actions
+export const { setText, processText, processFillers, processFilterWords, processAdverbs, processSentenceLengths, processRepeatedPhrases, processPassiveVoice, toggleViewMode } = editorSlice.actions
 export default editorSlice.reducer
