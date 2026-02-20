@@ -28,6 +28,24 @@ export const STOP_WORDS = new Set([
   "shouldn't", "isn't", "aren't", "wasn't", "weren't", "haven't", "hadn't",
 ])
 
+// Words ending in -ly that are NOT adverbs, used to filter false positives
+export const ADVERB_EXCLUSIONS = new Set([
+  // Nouns
+  'family', 'belly', 'jelly', 'folly', 'holly', 'lily', 'molly', 'bully',
+  'ally', 'rally', 'tally', 'homily', 'anomaly',
+  // Verbs where -ly is part of the root, not an adverb suffix
+  'reply', 'apply', 'supply', 'imply', 'comply', 'multiply',
+  // Adjectives that do not typically function as adverbs
+  'friendly', 'lonely', 'lovely', 'ugly', 'silly', 'holy', 'lively', 'likely', 'timely',
+  'sprightly', 'sickly', 'burly', 'curly', 'surly',
+  'fatherly', 'motherly', 'brotherly', 'sisterly', 'neighborly', 'cowardly',
+  'worldly', 'manly', 'womanly', 'kingly', 'queenly', 'godly',
+  'beastly', 'ghostly', 'saintly', 'miserly', 'masterly', 'priestly', 'knightly',
+  'homely', 'shapely', 'stately', 'comely', 'courtly', 'lordly', 'princely',
+  'scholarly', 'orderly', 'elderly', 'earthly', 'heavenly',
+  'northerly', 'southerly', 'easterly', 'westerly',
+])
+
 // Perception / cognition verbs that create distance between reader and narrative
 export const FILTER_WORDS = new Set([
   // visual

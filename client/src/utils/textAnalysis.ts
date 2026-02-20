@@ -1,4 +1,4 @@
-import { STOP_WORDS, FILTER_WORDS } from './wordLists'
+import { STOP_WORDS, FILTER_WORDS, ADVERB_EXCLUSIONS } from './wordLists'
 
 export interface WordCount {
   word: string
@@ -36,8 +36,9 @@ export function extractFilterWordFrequency(text: string): WordCount[] {
   return countWords(text, (word) => FILTER_WORDS.has(word))
 }
 
-// Basic adverb detection: words ending in -ly (length > 3 avoids false matches like "fly")
-// There's still some work here to build a ban list of false postiives.
+// Adverb detection: words ending in -ly, excluding known false positives (nouns,
+// -ply verbs, and adjectives). Edge cases that can serve as adverbs
+// in prose (early, daily, nightly, leisurely) are intentionally kept.
 export function extractAdverbFrequency(text: string): WordCount[] {
-  return countWords(text, (word) => word.endsWith('ly') && word.length > 3)
+  return countWords(text, (word) => word.endsWith('ly') && word.length > 3 && !ADVERB_EXCLUSIONS.has(word))
 }
