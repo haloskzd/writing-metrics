@@ -9,6 +9,7 @@ function App() {
   const wordFrequency = useSelector((state: RootState) => state.editor.wordFrequency)
   const fillerFrequency = useSelector((state: RootState) => state.editor.fillerFrequency)
   const filterWordFrequency = useSelector((state: RootState) => state.editor.filterWordFrequency)
+  const adverbFrequency = useSelector((state: RootState) => state.editor.adverbFrequency)
 
   return (
     <div className="app">
@@ -22,6 +23,7 @@ function App() {
       <FrequencyPanel title="Word Frequency" data={wordFrequency} barClass="bar" />
       <FrequencyPanel title="Filler Word Frequency" data={fillerFrequency} barClass="bar bar--filler" />
       <FrequencyPanel title="Filter Word Frequency" data={filterWordFrequency} barClass="bar bar--filter" />
+      <FrequencyPanel title="Adverb Frequency" data={adverbFrequency} barClass="bar bar--adverb" />
     </div>
   )
 }

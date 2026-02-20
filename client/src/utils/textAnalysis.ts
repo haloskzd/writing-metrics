@@ -35,3 +35,9 @@ export function extractFillerFrequency(text: string): WordCount[] {
 export function extractFilterWordFrequency(text: string): WordCount[] {
   return countWords(text, (word) => FILTER_WORDS.has(word))
 }
+
+// Basic adverb detection: words ending in -ly (length > 3 avoids false matches like "fly")
+// There's still some work here to build a ban list of false postiives.
+export function extractAdverbFrequency(text: string): WordCount[] {
+  return countWords(text, (word) => word.endsWith('ly') && word.length > 3)
+}
