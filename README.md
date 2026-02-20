@@ -94,6 +94,10 @@ npm run db:migrate --workspace=server
 - [ ] Add reducer test for `processAdverbs` in `client/src/store/editorSlice.test.ts`
 - [ ] Add unit tests for `extractSentenceLengths` in `client/src/utils/textAnalysis.test.ts`
 - [ ] Add reducer test for `processSentenceLengths` in `client/src/store/editorSlice.test.ts`
+- [ ] Add unit tests for `extractRepeatedPhrases` in `client/src/utils/textAnalysis.test.ts`
+- [ ] Add reducer test for `processRepeatedPhrases` in `client/src/store/editorSlice.test.ts`
+- [ ] Implement passive voice detection (`extractPassiveVoice` in `client/src/utils/textAnalysis.ts`)
+- [x] Implement repeated phrases search (`extractRepeatedPhrases` in `client/src/utils/textAnalysis.ts`)
 - [x] Update `extractAdverbFrequency` with a ban list of false positives
 
 ---

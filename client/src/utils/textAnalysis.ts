@@ -43,6 +43,33 @@ export function extractAdverbFrequency(text: string): WordCount[] {
   return countWords(text, (word) => word.endsWith('ly') && word.length > 3 && !ADVERB_EXCLUSIONS.has(word))
 }
 
+// Repeated phrase detection: counts all bigrams and trigrams, keeping only
+// those that appear at least 10 times. Returns the top 30 by frequency.
+export function extractRepeatedPhrases(text: string): WordCount[] {
+  const normalized = text.toLowerCase().replace(/[\u2018\u2019]/g, "'")
+  const tokens = (normalized.match(/[a-z']+/g) ?? [])
+    .map(t => t.replace(/^'+|'+$/g, ''))
+    .filter(t => t.length > 0)
+
+  const counts = new Map<string, number>()
+  for (let i = 0; i < tokens.length; i++) {
+    if (i + 1 < tokens.length) {
+      const bigram = `${tokens[i]} ${tokens[i + 1]}`
+      counts.set(bigram, (counts.get(bigram) ?? 0) + 1)
+    }
+    if (i + 2 < tokens.length) {
+      const trigram = `${tokens[i]} ${tokens[i + 1]} ${tokens[i + 2]}`
+      counts.set(trigram, (counts.get(trigram) ?? 0) + 1)
+    }
+  }
+
+  return Array.from(counts.entries())
+    .filter(([phrase, count]) => count >= 10 && phrase.split(' ').some(w => !STOP_WORDS.has(w)))
+    .map(([word, count]) => ({ word, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 30)
+}
+
 function countSentencesIntoBuckets(sentences: string[]) {
   const buckets = [
     { label: '1–5 words',   max: 5,        count: 0 },

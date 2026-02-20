@@ -12,6 +12,7 @@ function App() {
   const filterWordFrequency = useSelector((state: RootState) => state.editor.filterWordFrequency)
   const adverbFrequency = useSelector((state: RootState) => state.editor.adverbFrequency)
   const sentenceLengthFrequency = useSelector((state: RootState) => state.editor.sentenceLengthFrequency)
+  const repeatedPhraseFrequency = useSelector((state: RootState) => state.editor.repeatedPhraseFrequency)
 
   const wordCount = (text.match(/\S+/g) ?? []).length
   const countLabel = wordCount > 0 ? ` — ${wordCount} words` : ''
@@ -30,6 +31,7 @@ function App() {
       <FrequencyPanel title="Filter Word Frequency" data={filterWordFrequency} barClass="bar bar--filter" />
       <FrequencyPanel title="Adverb Frequency" data={adverbFrequency} barClass="bar bar--adverb" />
       <FrequencyPanel title="Sentence Length Distribution" data={sentenceLengthFrequency} barClass="bar bar--sentence" />
+      <FrequencyPanel title="Repeated Phrases" data={repeatedPhraseFrequency} barClass="bar bar--phrase" />
     </div>
   )
 }
