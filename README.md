@@ -90,7 +90,9 @@ npm run db:migrate --workspace=server
 
 - [ ] Add unit tests for `extractFilterWordFrequency` in `client/src/utils/textAnalysis.test.ts`
 - [ ] Add reducer test for `processFilterWords` in `client/src/store/editorSlice.test.ts`
-- [ ] Update `extractAdverbFrequency` with a ban list of false postiives
+- [ ] Add unit tests for `extractAdverbFrequency` in `client/src/utils/textAnalysis.test.ts`
+- [ ] Add reducer test for `processAdverbs` in `client/src/store/editorSlice.test.ts`
+- [ ] Update `extractAdverbFrequency` with a ban list of false positives
 
 ---
 
