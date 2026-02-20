@@ -3,8 +3,19 @@ import type { RootState } from '../store/index'
 
 export default function FillerFrequency() {
   const fillerFrequency = useSelector((state: RootState) => state.editor.fillerFrequency)
+  const viewMode = useSelector((state: RootState) => state.editor.viewMode)
 
   if (fillerFrequency.length === 0) return null
+
+  if (viewMode === 'text') {
+    const plain = fillerFrequency.map(({ word, count }) => `${word}: ${count}`).join('\n')
+    return (
+      <div className="results">
+        <h2 className="results-title">Filler Word Frequency</h2>
+        <textarea className="results-text" readOnly value={plain} />
+      </div>
+    )
+  }
 
   const maxCount = fillerFrequency[0].count
 

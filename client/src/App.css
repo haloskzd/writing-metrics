@@ -91,6 +91,12 @@ body {
   border-color: #6366f1;
 }
 
+.toolbar-btn--active {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+}
+
 /* ── Word Frequency results ── */
 .results {
   margin-top: 24px;
@@ -98,6 +104,21 @@ body {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 20px 24px;
+}
+
+.results-text {
+  width: 100%;
+  min-height: 160px;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #2d3748;
+  background: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  resize: vertical;
+  cursor: text;
 }
 
 .results-title {

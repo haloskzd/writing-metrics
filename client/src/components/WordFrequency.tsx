@@ -3,8 +3,19 @@ import type { RootState } from '../store/index'
 
 export default function WordFrequency() {
   const wordFrequency = useSelector((state: RootState) => state.editor.wordFrequency)
+  const viewMode = useSelector((state: RootState) => state.editor.viewMode)
 
   if (wordFrequency.length === 0) return null
+
+  if (viewMode === 'text') {
+    const plain = wordFrequency.map(({ word, count }) => `${word}: ${count}`).join('\n')
+    return (
+      <div className="results">
+        <h2 className="results-title">Word Frequency</h2>
+        <textarea className="results-text" readOnly value={plain} />
+      </div>
+    )
+  }
 
   const maxCount = wordFrequency[0].count
 
