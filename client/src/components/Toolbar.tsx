@@ -12,6 +12,7 @@ export default function Toolbar() {
       <button
         className="toolbar-btn"
         title="Process Text"
+        aria-label="Process Text"
         onClick={() => dispatch(processText())}
       >
         <ScanText size={22} />
@@ -19,6 +20,7 @@ export default function Toolbar() {
       <button
         className="toolbar-btn"
         title="Analyze Filler Words"
+        aria-label="Analyze Filler Words"
         onClick={() => dispatch(processFillers())}
       >
         <Hash size={22} />
@@ -26,6 +28,8 @@ export default function Toolbar() {
       <button
         className={`toolbar-btn${viewMode === 'text' ? ' toolbar-btn--active' : ''}`}
         title="Toggle Text View"
+        aria-label="Toggle Text View"
+        aria-pressed={viewMode === 'text'}
         onClick={() => dispatch(toggleViewMode())}
       >
         <List size={22} />

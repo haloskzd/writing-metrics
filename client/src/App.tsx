@@ -1,10 +1,14 @@
+import { useSelector } from 'react-redux'
 import './App.css'
 import Editor from './components/Editor'
 import Toolbar from './components/Toolbar'
-import WordFrequency from './components/WordFrequency'
-import FillerFrequency from './components/FillerFrequency'
+import FrequencyPanel from './components/FrequencyPanel'
+import type { RootState } from './store/index'
 
 function App() {
+  const wordFrequency = useSelector((state: RootState) => state.editor.wordFrequency)
+  const fillerFrequency = useSelector((state: RootState) => state.editor.fillerFrequency)
+
   return (
     <div className="app">
       <h1>Writing Metrics</h1>
@@ -14,8 +18,8 @@ function App() {
         </div>
         <Toolbar />
       </div>
-      <WordFrequency />
-      <FillerFrequency />
+      <FrequencyPanel title="Word Frequency" data={wordFrequency} barClass="bar" />
+      <FrequencyPanel title="Filler Word Frequency" data={fillerFrequency} barClass="bar bar--filler" />
     </div>
   )
 }

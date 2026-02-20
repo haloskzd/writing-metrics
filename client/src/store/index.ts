@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import helloReducer from './helloSlice'
 import editorReducer from './editorSlice'
 
 export const store = configureStore({
   reducer: {
-    hello: helloReducer,
     editor: editorReducer,
   },
 })
