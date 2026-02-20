@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { extractWordFrequency, extractFillerFrequency, extractFilterWordFrequency, extractAdverbFrequency, WordCount } from '../utils/textAnalysis'
 
-interface EditorState {
+export interface EditorState {
   text: string
   wordFrequency: WordCount[]
   fillerFrequency: WordCount[]
