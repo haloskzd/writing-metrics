@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Prisma
+server/prisma/dev.db
+server/prisma/dev.db-journal
+server/.env
+
+# Vite
+client/dist/
+
+# OS
+.DS_Store
+Thumbs.db
