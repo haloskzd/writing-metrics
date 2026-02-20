@@ -178,6 +178,10 @@ body {
   background: #14b8a6;
 }
 
+.bar--sentence {
+  background: #8b5cf6;
+}
+
 .bar-count {
   width: 36px;
   font-size: 0.85rem;

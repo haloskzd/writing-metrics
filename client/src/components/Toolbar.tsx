@@ -1,6 +1,6 @@
-import { ScanText, Hash, Eye, Italic, List } from 'lucide-react'
+import { ScanText, Hash, Eye, Italic, Ruler, List } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
-import { processText, processFillers, processFilterWords, processAdverbs, toggleViewMode } from '../store/editorSlice'
+import { processText, processFillers, processFilterWords, processAdverbs, processSentenceLengths, toggleViewMode } from '../store/editorSlice'
 import type { RootState } from '../store/index'
 
 export default function Toolbar() {
@@ -40,6 +40,14 @@ export default function Toolbar() {
         onClick={() => dispatch(processAdverbs())}
       >
         <Italic size={22} />
+      </button>
+      <button
+        className="toolbar-btn"
+        title="Analyze Sentence Lengths"
+        aria-label="Analyze Sentence Lengths"
+        onClick={() => dispatch(processSentenceLengths())}
+      >
+        <Ruler size={22} />
       </button>
       <button
         className={`toolbar-btn${viewMode === 'text' ? ' toolbar-btn--active' : ''}`}
